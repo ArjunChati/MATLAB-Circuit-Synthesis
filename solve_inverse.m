@@ -28,6 +28,10 @@ function netlist_path = solve_inverse(input_file, output_name)
     grid on;
     
     % 4. Export to Netlist
+    plot_path = fullfile('output', [output_name '_plot.png']);
+    saveas(gcf, plot_path);
+    fprintf('Plot saved to: %s\n', plot_path);
+    
     netlist_path = fullfile('output', [output_name '.sp']);
     if ispassive(fit)
         generateSPICE(fit, netlist_path);

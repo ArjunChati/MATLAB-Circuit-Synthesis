@@ -29,7 +29,11 @@ function netlist_path = solve_inverse_passive(input_file, output_name)
     grid on; xlabel('Frequency (GHz)', 'Color', 'w');
 
     % 5. Export
+    plot_path = fullfile('output', [output_name '_plot.png']);
+    saveas(gcf, plot_path);
+    fprintf('Plot saved to: %s\n', plot_path);
+    
     netlist_path = fullfile('output', [output_name '.sp']);
     fit.generateSPICE(netlist_path);
-    fprintf('Plot Restored. Netlist saved to: %s\n', netlist_path);
+    fprintf('Netlist saved to: %s\n', netlist_path);
 end
