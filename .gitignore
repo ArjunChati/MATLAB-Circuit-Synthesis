@@ -1,0 +1,9 @@
+# Ignore temporary generation and log files
+out/
+output/
+*.log
+log.txt
+output.txt
+matlab_output.txt
+status.txt
+*.png
