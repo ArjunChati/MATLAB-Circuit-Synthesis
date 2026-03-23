@@ -26,6 +26,7 @@ function s2p_file = generate_synthetic_multipole(filename)
     nw = sparameters(S_tensor, f);
     if ~exist('data', 'dir'), mkdir('data'); end
     s2p_file = fullfile('data', filename);
+    if exist(s2p_file, 'file'), delete(s2p_file); end
     rfwrite(nw, s2p_file);
     fprintf('Realistic tissue data created: %s\n', s2p_file);
 end
