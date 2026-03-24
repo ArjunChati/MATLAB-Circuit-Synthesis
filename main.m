@@ -1,7 +1,10 @@
 %% Inverse Problem Master Controller (Hybrid Mode)
 clear; clc; close all; % Absolute reset to prevent data "bleeding"
 
-% 1. Project Directory Check
+% 1. Project Directory Check & Path Linking
+addpath(fullfile(pwd, 'generators'));
+addpath(fullfile(pwd, 'solvers'));
+
 if ~exist('data', 'dir'), mkdir('data'); end
 if ~exist('output', 'dir'), mkdir('output'); end
 
