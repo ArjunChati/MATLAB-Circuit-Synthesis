@@ -3,8 +3,9 @@ function netlist_path = solve_inverse_passive(input_file, output_name)
     S_obj = sparameters(input_file);
     f = S_obj.Frequencies;
     
-    % 2. Vector Fit (Simple 18-pole fit for ideal RLC)
-    [fit, ~] = rationalfit(S_obj, 'NPoles', [2 18], 'Tolerance', -40);
+    % 2. Extract S11 natively for stable 1-port rationalfitting
+    S11 = squeeze(S_obj.Parameters(1,1,:));
+    [fit, ~] = rationalfit(f, S11, 'NPoles', [2 18], 'Tolerance', -40);
     
     % 3. Calculate Response
     resp = freqresp(fit, f); 
@@ -14,7 +15,7 @@ function netlist_path = solve_inverse_passive(input_file, output_name)
     
     % Magnitude
     subplot(2,1,1);
-    plot(f/1e9, 20*log10(abs(squeeze(S_obj.Parameters))), 'b', 'LineWidth', 2); hold on;
+    plot(f/1e9, 20*log10(abs(S11)), 'b', 'LineWidth', 2); hold on;
     plot(f/1e9, 20*log10(abs(squeeze(resp))), 'r--', 'LineWidth', 2);
     title('Magnitude Comparison', 'Color', 'w'); ylabel('S11 (dB)', 'Color', 'w');
     set(gca, 'Color', [0.15 0.15 0.15], 'XColor', 'w', 'YColor', 'w', 'GridColor', 'w');
@@ -22,7 +23,7 @@ function netlist_path = solve_inverse_passive(input_file, output_name)
     
     % Phase
     subplot(2,1,2);
-    plot(f/1e9, angle(squeeze(S_obj.Parameters))*180/pi, 'b', 'LineWidth', 2); hold on;
+    plot(f/1e9, angle(S11)*180/pi, 'b', 'LineWidth', 2); hold on;
     plot(f/1e9, angle(squeeze(resp))*180/pi, 'r--', 'LineWidth', 2);
     title('Phase Comparison', 'Color', 'w'); ylabel('Phase (deg)', 'Color', 'w');
     set(gca, 'Color', [0.15 0.15 0.15], 'XColor', 'w', 'YColor', 'w', 'GridColor', 'w');

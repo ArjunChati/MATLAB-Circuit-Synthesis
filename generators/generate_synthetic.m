@@ -30,6 +30,7 @@ nw = sparameters(S_tensor, f);
     
     % Save as a Touchstone (.s2p) file
     s2p_file = fullfile('data', filename);
+    if exist(s2p_file, 'file'), delete(s2p_file); end
     rfwrite(nw, s2p_file); %
     fprintf('Synthetic data created: %s\n', s2p_file);
 end

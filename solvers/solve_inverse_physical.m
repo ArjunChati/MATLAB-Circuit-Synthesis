@@ -6,9 +6,12 @@ function netlist_path = solve_inverse_physical(input_file, output_name)
     % 2. Convert to Z-parameters for Foster I synthesis mapping
     Z_obj = zparameters(S_obj);
     
-    % 3. Vector Fit on Z-parameters directly
-    % Weighting and tighter tolerance forced for physical behavior
-    [fit, ~] = rationalfit(f, squeeze(Z_obj.Parameters), 'NPoles', [2 16], 'Tolerance', -40);
+    % Extract the Z11 input impedance for a 1-port physical synthesis
+    Z11 = squeeze(Z_obj.Parameters(1,1,:));
+    
+    % 3. Vector Fit on Z11 directly
+    % Let default allocation handle fitting structure to prevent numerical hangs
+    [fit, ~] = rationalfit(f, Z11);
     
     % 4. Generate the Plot
     resp = freqresp(fit, f); 
@@ -16,7 +19,7 @@ function netlist_path = solve_inverse_physical(input_file, output_name)
     
     % Magnitude
     subplot(2,1,1);
-    plot(f/1e9, 20*log10(abs(squeeze(Z_obj.Parameters))), 'b', 'LineWidth', 2); hold on;
+    plot(f/1e9, 20*log10(abs(Z11)), 'b', 'LineWidth', 2); hold on;
     plot(f/1e9, 20*log10(abs(squeeze(resp))), 'r--', 'LineWidth', 2);
     title('Impedance Magnitude Comparison', 'Color', 'w'); ylabel('Z11 (dB)', 'Color', 'w');
     set(gca, 'Color', [0.15 0.15 0.15], 'XColor', 'w', 'YColor', 'w', 'GridColor', 'w');
@@ -24,7 +27,7 @@ function netlist_path = solve_inverse_physical(input_file, output_name)
     
     % Phase
     subplot(2,1,2);
-    plot(f/1e9, angle(squeeze(Z_obj.Parameters))*180/pi, 'b', 'LineWidth', 2); hold on;
+    plot(f/1e9, angle(Z11)*180/pi, 'b', 'LineWidth', 2); hold on;
     plot(f/1e9, angle(squeeze(resp))*180/pi, 'r--', 'LineWidth', 2);
     title('Impedance Phase Comparison', 'Color', 'w'); ylabel('Phase (deg)', 'Color', 'w');
     set(gca, 'Color', [0.15 0.15 0.15], 'XColor', 'w', 'YColor', 'w', 'GridColor', 'w');
