@@ -21,7 +21,7 @@ function s2p_file = generate_synthetic_multipole(filename)
     S11 = (Z - 50) ./ (Z + 50);
     S11 = S11 + (randn(size(S11)) + 1j*randn(size(S11))) * 0.005; % Add real noise
     
-    % Save to .s2p
+    % Save to .s1p
     S_tensor = reshape(S11, [1, 1, 500]);
     nw = sparameters(S_tensor, f);
     if ~exist('data', 'dir'), mkdir('data'); end

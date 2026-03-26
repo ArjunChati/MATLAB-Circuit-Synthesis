@@ -43,4 +43,9 @@ function netlist_path = solve_inverse_physical(input_file, output_name)
     netlist_path = fullfile('output', [output_name '.sp']);
     writefoster_RLC(fit, netlist_path, output_name);
     fprintf('Physical RLC Netlist successfully synthesized to: %s\n', netlist_path);
+    
+    % 7. Export natively to LTSpice Schematic (.asc)
+    asc_path = fullfile('output', [output_name '.asc']);
+    writefoster_asc(fit, asc_path, output_name);
+    fprintf('LTSpice Schematic generated at: %s\n', asc_path);
 end

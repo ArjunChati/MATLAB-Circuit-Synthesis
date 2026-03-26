@@ -10,11 +10,11 @@ fprintf('Starting Comprehensive Validation...\n');
 
 % 1. Create Target Files
 disp('Generating synthetic targets...');
-if exist('data/simple_truth.s2p', 'file'), delete('data/simple_truth.s2p'); end
-target_simple = generate_synthetic('simple_truth.s2p');
+if exist('data/simple_truth.s1p', 'file'), delete('data/simple_truth.s1p'); end
+target_simple = generate_synthetic('simple_truth.s1p');
 
-if exist('data/multipole_truth.s2p', 'file'), delete('data/multipole_truth.s2p'); end
-target_multi = generate_synthetic_multipole('multipole_truth.s2p');
+if exist('data/multipole_truth.s1p', 'file'), delete('data/multipole_truth.s1p'); end
+target_multi = generate_synthetic_multipole('multipole_truth.s1p');
 
 target_ring = 'data/ring slot.s2p';
 

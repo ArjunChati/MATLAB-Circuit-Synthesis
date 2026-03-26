@@ -28,7 +28,7 @@ nw = sparameters(S_tensor, f);
     % Ensure the data folder exists
     if ~exist('data', 'dir'), mkdir('data'); end
     
-    % Save as a Touchstone (.s2p) file
+    % Save as a Touchstone (.s1p) file
     s2p_file = fullfile('data', filename);
     if exist(s2p_file, 'file'), delete(s2p_file); end
     rfwrite(nw, s2p_file); %
