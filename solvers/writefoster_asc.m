@@ -19,10 +19,9 @@ function writefoster_asc(fit_z, filename, output_name)
     
     % --- TEST BENCH (Voltage Source V1) ---
     % Vertical source
-    fprintf(fid, 'SYMBOL voltage 160 720 R0\n');
+    fprintf(fid, 'SYMBOL voltage 160 704 R0\n');
     fprintf(fid, 'SYMATTR InstName V1\n');
     fprintf(fid, 'SYMATTR Value AC 1\n');
-    fprintf(fid, 'WIRE 160 720 160 640\n');
     fprintf(fid, 'WIRE 160 640 400 640\n'); % Bus to the circuit
     fprintf(fid, 'WIRE 160 800 160 880\n');
     fprintf(fid, 'FLAG 160 880 0\n');
@@ -39,7 +38,7 @@ function writefoster_asc(fit_z, filename, output_name)
     % --- SERIES D RESISTANCE ---
     if abs(D) > 1e-6
         xa = x_curr; xb = xa + dx;
-        fprintf(fid, 'SYMBOL res %d 640 R270\n', xa);
+        fprintf(fid, 'SYMBOL res %d %d R270\n', xa-16, 640+16);
         fprintf(fid, 'SYMATTR InstName R_series_D\n');
         fprintf(fid, 'SYMATTR Value %g\n', abs(D));
         fprintf(fid, 'WIRE %d 640 %d 640\n', xa+80, 640, xb, 640);
@@ -49,7 +48,7 @@ function writefoster_asc(fit_z, filename, output_name)
     % --- SERIES E INDUCTANCE ---
     if abs(E) > 1e-15
         xa = x_curr; xb = xa + dx;
-        fprintf(fid, 'SYMBOL ind %d 640 R270\n', xa);
+        fprintf(fid, 'SYMBOL ind %d %d R270\n', xa-16, 640+16);
         fprintf(fid, 'SYMATTR InstName L_series_E\n');
         fprintf(fid, 'SYMATTR Value %g\n', abs(E));
         fprintf(fid, 'WIRE %d 640 %d 640\n', xa+80, 640, xb, 640);
@@ -74,13 +73,13 @@ function writefoster_asc(fit_z, filename, output_name)
             fprintf(fid, 'WIRE %d %d %d %d\n', xb, y_r, xb, y_c);
             
             % R Branch
-            fprintf(fid, 'SYMBOL res %d %d R270\n', xa, y_r);
+            fprintf(fid, 'SYMBOL res %d %d R270\n', xa-16, y_r+16);
             fprintf(fid, 'SYMATTR InstName R_p%d\n', branch_count);
             fprintf(fid, 'SYMATTR Value %g\n', Res);
             fprintf(fid, 'WIRE %d %d %d %d\n', xa+80, y_r, xb, y_r);
             
             % C Branch
-            fprintf(fid, 'SYMBOL cap %d %d R270\n', xa, y_c);
+            fprintf(fid, 'SYMBOL cap %d %d R270\n', xa, y_c+16);
             fprintf(fid, 'SYMATTR InstName C_p%d\n', branch_count);
             fprintf(fid, 'SYMATTR Value %g\n', Cap);
             fprintf(fid, 'WIRE %d %d %d %d\n', xa+64, y_c, xb, y_c);
@@ -105,26 +104,26 @@ function writefoster_asc(fit_z, filename, output_name)
                 fprintf(fid, 'WIRE %d %d %d %d\n', xb, y_r, xb, y_c);
                 
                 % R
-                fprintf(fid, 'SYMBOL res %d %d R270\n', xa, y_r);
+                fprintf(fid, 'SYMBOL res %d %d R270\n', xa-16, y_r+16);
                 fprintf(fid, 'SYMATTR InstName R_p%d\n', branch_count);
                 fprintf(fid, 'SYMATTR Value %g\n', Res);
                 fprintf(fid, 'WIRE %d %d %d %d\n', xa+80, y_r, xb, y_r);
                 
                 % L
-                fprintf(fid, 'SYMBOL ind %d %d R270\n', xa, y_l);
+                fprintf(fid, 'SYMBOL ind %d %d R270\n', xa-16, y_l+16);
                 fprintf(fid, 'SYMATTR InstName L_p%d\n', branch_count);
                 fprintf(fid, 'SYMATTR Value %g\n', Ind);
                 fprintf(fid, 'WIRE %d %d %d %d\n', xa+80, y_l, xb, y_l);
                 
                 % C
-                fprintf(fid, 'SYMBOL cap %d %d R270\n', xa, y_c);
+                fprintf(fid, 'SYMBOL cap %d %d R270\n', xa, y_c+16);
                 fprintf(fid, 'SYMATTR InstName C_p%d\n', branch_count);
                 fprintf(fid, 'SYMATTR Value %g\n', Cap);
                 fprintf(fid, 'WIRE %d %d %d %d\n', xa+64, y_c, xb, y_c);
             else
                 % Non-physical root, bypass with short
                 fprintf(fid, 'WIRE %d 640 %d 640\n', xa, xb);
-                fprintf(fid, 'SYMBOL res %d 640 R270\n', xa);
+                fprintf(fid, 'SYMBOL res %d %d R270\n', xa-16, 640+16);
                 fprintf(fid, 'SYMATTR InstName R_pass_%d\n', branch_count);
                 fprintf(fid, 'SYMATTR Value 1e-3\n');
                 fprintf(fid, 'WIRE %d 640 %d 640\n', xa+80, xb);
