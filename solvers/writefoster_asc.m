@@ -17,11 +17,12 @@ function writefoster_asc(fit_z, filename, output_name)
     x_start = 400;
     y_center = 800;
     
-    % --- TEST BENCH (Voltage Source V1) ---
+    % --- TEST Bench (Voltage Source V1) ---
     % Vertical source
     fprintf(fid, 'SYMBOL voltage 160 704 R0\n');
     fprintf(fid, 'SYMATTR InstName V1\n');
     fprintf(fid, 'SYMATTR Value AC 1\n');
+    fprintf(fid, 'WIRE 160 720 160 640\n');
     fprintf(fid, 'WIRE 160 640 400 640\n'); % Bus to the circuit
     fprintf(fid, 'WIRE 160 800 160 880\n');
     fprintf(fid, 'FLAG 160 880 0\n');
