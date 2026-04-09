@@ -7,3 +7,9 @@ output.txt
 matlab_output.txt
 status.txt
 *.png
+
+# Python ignores
+venv/
+__pycache__/
+*.pyc
+*.pyo

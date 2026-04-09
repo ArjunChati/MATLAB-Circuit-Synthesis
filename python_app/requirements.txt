@@ -1,0 +1,7 @@
+numpy>=1.24.0
+scipy>=1.10.0
+matplotlib>=3.7.0
+scikit-rf>=0.29.0
+customtkinter>=5.2.0
+PySpice>=1.5
+pyinstaller>=6.3.0

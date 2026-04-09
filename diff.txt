@@ -1,0 +1,51 @@
+﻿diff --git "a/output\\simple_synth_physical.asc" "b/output\\simple_synth_physical_fixed.asc"
+index 9c4837e..0c8f50e 100644
+--- "a/output\\simple_synth_physical.asc"
++++ "b/output\\simple_synth_physical_fixed.asc"
+@@ -1,27 +1,29 @@
+-Version 4
++Version 4.1
+ SHEET 1 3000 1500
+-TEXT -160 -100 Left 2 !.ac dec 100 1meg 10g
+-SYMBOL voltage 160 720 R0
+-SYMATTR InstName V1
+-SYMATTR Value AC 1
++WIRE 800 400 480 400
++WIRE 400 640 400 400
++WIRE 400 640 160 640
++WIRE 800 640 800 400
++WIRE 800 640 480 640
+ WIRE 160 720 160 640
+-WIRE 160 640 400 640
+-WIRE 160 800 160 880
++WIRE 160 880 160 800
++WIRE 400 880 400 640
++WIRE 800 880 800 640
++WIRE 800 880 464 880
+ FLAG 160 880 0
+ FLAG 400 640 p1
+-IOPIN 400 640 InOut
+-WIRE 400 400 400 880
+-WIRE 800 400 800 880
+-SYMBOL res 400 400 R270
++IOPIN 400 640 BiDir
++FLAG 800 640 0
++SYMBOL voltage 160 704 R0
++SYMATTR InstName V1
++SYMATTR Value AC 1
++SYMBOL res 384 416 R270
+ SYMATTR InstName R_p1
+ SYMATTR Value 150
+-WIRE 480 400 800 400
+-SYMBOL ind 400 640 R270
++SYMBOL ind 384 656 R270
+ SYMATTR InstName L_p1
+ SYMATTR Value 5e-09
+-WIRE 480 640 800 640
+-SYMBOL cap 400 880 R270
++SYMBOL cap 400 896 R270
+ SYMATTR InstName C_p1
+ SYMATTR Value 2e-12
+-WIRE 464 880 800 880
+-FLAG 800 640 0
++TEXT -160 -104 Left 2 !.ac dec 100 1meg 10g

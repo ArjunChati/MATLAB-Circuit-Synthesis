@@ -1,0 +1,8 @@
+﻿C:\GitHub\CircuitSynthesis_ModelAlgo\output\simple_synth_physical.asc
+C:\GitHub\CircuitSynthesis_ModelAlgo\output\simple_synth_physical.log
+C:\GitHub\CircuitSynthesis_ModelAlgo\output\simple_synth_physical.op.raw
+C:\GitHub\CircuitSynthesis_ModelAlgo\output\simple_synth_physical.raw
+C:\GitHub\CircuitSynthesis_ModelAlgo\output\simple_synth_physical.sp
+C:\GitHub\CircuitSynthesis_ModelAlgo\output\simple_synth_physical_fixed.asc
+C:\GitHub\CircuitSynthesis_ModelAlgo\output\simple_synth_physical_plot.png
+C:\GitHub\CircuitSynthesis_ModelAlgo\output\simple_synth_physical_spec.json
